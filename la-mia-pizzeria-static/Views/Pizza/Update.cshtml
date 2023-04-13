@@ -1,0 +1,48 @@
+﻿@model PizzaFormModel
+@{
+    ViewData["Title"] = Model.Pizza.Name;
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post">
+    @Html.AntiForgeryToken();
+    <div class="mb-3">
+        <label> Modifica nome:</label>
+        <input asp-for="Pizza.Name"/>
+        <span asp-validation-for="Pizza.Name"></span>
+    </div>
+    <div class="mb-3">
+        <label> Modifica descrizione:</label>
+        <input asp-for="Pizza.Description" />
+        <span asp-validation-for="Pizza.Description"></span>
+    </div>
+    <div class="mb-3">
+        <label> modifica Prezzo:</label>
+        <input asp-for="Pizza.Price" />
+        <span asp-validation-for="Pizza.Price"></span>
+    </div>
+    <div class="mb-3">
+        <label> Modifica immagine:</label>
+        <input asp-for="Pizza.Image"/>
+        <span asp-validation-for="Pizza.Image"></span>
+    </div>
+
+    <div class="mb-3 w-75 mx-5">
+        <select asp-for="Pizza.CategoryId">
+            @foreach (Category elem in Model.Categories)
+            {
+
+                if (Model.Pizza.CategoryId == elem.Id)
+                {
+                    <option value="@elem.Id" selected>@elem.Name</option>
+                }
+                else
+                {
+                    <option value="@elem.Id">@elem.Name</option>
+                }
+
+            }
+        </select>
+    </div>
+    <button type="submit">Invia</button>
+    
+</form>
