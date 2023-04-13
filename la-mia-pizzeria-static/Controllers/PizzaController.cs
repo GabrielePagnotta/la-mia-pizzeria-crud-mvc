@@ -81,14 +81,15 @@ namespace la_mia_pizzeria_static.Controllers
                 {
                     return NotFound();
                 }
-                else
+
+                var formModel = new PizzaFormModel
                 {
-                    List<Category> Categories = ctx.Categories.ToList();
-                    PizzaFormModel Model = new PizzaFormModel();
-                    Model.Pizza = new Pizza();
-                    Model.Categories = Categories;
-                    return View(Model);
-                }
+                    Pizza = editpizza,
+                    Categories = ctx.Categories.ToList()
+                };
+
+                return View(formModel);
+                
             }
         }
         [HttpPost]

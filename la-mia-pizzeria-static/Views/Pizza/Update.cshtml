@@ -3,7 +3,7 @@
     ViewData["Title"] = Model.Pizza.Name;
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 }
-<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post">
+<form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken();
     <div class="mb-3">
         <label> Modifica nome:</label>
@@ -25,7 +25,6 @@
         <input asp-for="Pizza.Image"/>
         <span asp-validation-for="Pizza.Image"></span>
     </div>
-
     <div class="mb-3 w-75 mx-5">
         <select asp-for="Pizza.CategoryId">
             @foreach (Category elem in Model.Categories)
