@@ -20,7 +20,29 @@ namespace la_mia_pizzeria_static.Models
         public int? CategoryId { get; set; }
         public Category ? Category { get; set; }
 
-        public Pizza() { }
+        public List<Ingredient>? Ingredients { get; set; }
+
+        public Pizza() { 
+
+            //per evitare NullReferenceException
+            Ingredients = new List<Ingredient>();
+        }
+
+        public Pizza(int id, string name, string description, string image, string price,List<Ingredient> ingredients)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Image = image;
+            Price = price;
+
+            if(ingredients == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            Ingredients = ingredients;
+        }
 
         public Pizza(int id, string name, string description, string image, string price)
         {
@@ -29,6 +51,8 @@ namespace la_mia_pizzeria_static.Models
             Description = description;
             Image = image;
             Price = price;
+
+            Ingredients = new List<Ingredient>();
         }
     }
 }
