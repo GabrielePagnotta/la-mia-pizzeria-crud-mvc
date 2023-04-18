@@ -8,6 +8,7 @@ namespace la_mia_pizzeria_static.Controllers
     
     public class PizzaController : Controller
     {
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             
@@ -16,7 +17,7 @@ namespace la_mia_pizzeria_static.Controllers
             var pizza= ctx.Pizzas.ToArray();
             return View(pizza);
         }
-
+        [Authorize (Roles ="User")]
         public IActionResult Details(int id)
         {
             using (var ctx = new DbPizzaContext()) 
@@ -34,6 +35,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
 
         public IActionResult Create(PizzaFormModel data)
         {
@@ -82,8 +84,8 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
         [HttpGet]
-        
-        
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Create(Ingredient ingredient) 
         {
             using (DbPizzaContext context = new DbPizzaContext())
@@ -109,6 +111,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(int id)
         {
             using (DbPizzaContext ctx = new DbPizzaContext()) 
@@ -170,6 +173,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int Id) 
         {
             using (DbPizzaContext context =new DbPizzaContext())
